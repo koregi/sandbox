@@ -1,6 +1,6 @@
 #include "service.h"
 
-#include <iostream>
+#include <fmt/format.h>
 
 namespace calculator {
     service::service()
@@ -9,6 +9,6 @@ namespace calculator {
 
     // TODO [pavelbezpavel]: bruh...
     void service::run() {
-        std::cout << engine::sum(m_config.get_value(), m_config.get_value()) << "\n";
+        fmt::print("{}\n", engine::sum(m_config.get_value(), m_config.get_value()));
     }
 }  // namespace calculator
