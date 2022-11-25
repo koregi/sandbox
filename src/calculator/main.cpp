@@ -1,17 +1,19 @@
 #include "service.h"
 
-#include <fmt/format.h>
+#include <spdlog/spdlog.h>
 
 int main() {
+    spdlog::set_level(spdlog::level::debug);
+
     try {
         calculator::service().run();
     }
     catch (const std::exception& ex) {
-        fmt::print("calculator service error: {}\n", ex.what());
+        spdlog::error("calculator service error: {}", ex.what());
         return -1;
     }
     catch (...) {
-        fmt::print("calculator service unknown error\n");
+        spdlog::error("calculator service unknown error");
         return -1;
     }
     return 0;
