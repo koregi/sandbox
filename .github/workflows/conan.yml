@@ -1,0 +1,35 @@
+name: conan
+
+on: [ push ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Reuse ccache directory
+        uses: actions/cache@v3
+        with:
+          path: ~/.ccache
+          key: '${{matrix.os}} ${{matrix.info}} ccache-dir ${{github.ref}} run-${{github.run_number}}'
+          restore-keys: |
+            ${{matrix.os}} ${{matrix.info}} ccache-dir ${{github.ref}} run-'
+            ${{matrix.os}} ${{matrix.info}} ccache-
+
+      - name: Install packages
+        run : |
+          sudo apt install -y gcc g++ clang make cmake python3 python3-pip ccache
+          pip install conan
+          conan profile new --detect default && conan profile update settings.compiler.libcxx=libstdc++11 default
+
+      - name: Setup ccache
+        run : |
+          ccache -M 2.0GB
+          ccache -s
+
+      - name: Run conan
+        run : |
+          conan install . --build=missing

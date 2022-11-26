@@ -1,5 +1,8 @@
 # sandbox
 
+[![conan](https://github.com/koregi/sandbox/actions/workflows/conan.yml/badge.svg)](https://github.com/koregi/sandbox/actions/workflows/conan.yml)
+[![build](https://github.com/koregi/sandbox/actions/workflows/build.yml/badge.svg)](https://github.com/koregi/sandbox/actions/workflows/build.yml)
+
 ## requirements
 
 ```
