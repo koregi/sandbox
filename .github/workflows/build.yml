@@ -26,9 +26,14 @@ jobs:
           ccache -M 2.0GB
           ccache -s
 
-      - name: Run cmake
+      - name: Run conan
         run : |
           mkdir -p ${{github.workspace}}/build
+          cd ${{github.workspace}}/build
+          conan install ..
+
+      - name: Run cmake
+        run : |
           cmake -S ${{github.workspace}} -B ${{github.workspace}}/build
 
       - name: Build
