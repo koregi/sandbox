@@ -1,0 +1,30 @@
+name: conan
+
+on: [ push ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Reuse ccache directory
+        uses: actions/cache@v3
+        with:
+          path: ~/.ccache
+
+      - name: Setup ccache
+        run : |
+          ccache -M 2.0GB
+          ccache -s
+
+      - name: Run cmake
+        run : |
+          mkdir -p ${{github.workspace}}/build
+          cmake -S ${{github.workspace}} -B ${{github.workspace}}/build
+
+      - name: Build
+        run: cmake --build ${{github.workspace}}/build
+
