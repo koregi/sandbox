@@ -1,4 +1,4 @@
-name: conan
+name: build
 
 on: [ push ]
 
