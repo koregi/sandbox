@@ -32,4 +32,4 @@ jobs:
 
       - name: Run conan
         run : |
-          conan create . --build=missing
+          conan install . --build=missing
