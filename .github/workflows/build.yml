@@ -27,6 +27,7 @@ jobs:
 
       - name: Run cmake
         run : |
+          sudo apt install -y ccache
           mkdir -p ${{github.workspace}}/build
           cmake -S ${{github.workspace}} -B ${{github.workspace}}/build
 
